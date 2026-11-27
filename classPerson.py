@@ -7,32 +7,37 @@ class Person:
         self.starting_money = money
         self.stuff_done = []
 
-    def work(self):
-        self.money += 100
-        self.stuff_done.append("worked and earned 100")
-        print(f"{self.name} worked and earned 100")
-
-    def deposit(self, amount):
-        self.money += amount
-        self.stuff_done.append(f"deposited {amount}")
-        print(f"{self.name} deposited {amount}")
-
-    def withdraw(self, amount):
-        self.money -= amount
-        self.stuff_done.append(f"withdrew {amount}")
-        print(f"{self.name} withdrew {amount}")
-
-    def buy(self, amount):
-        if self.money < amount:
-            print(f"{self.name} does not have enough money to buy)")
-        elif amount <= 0:
-            print(f"{self.name} cannot buy an item with a non-positive amount")
+    def spend_money(self):
+        amount = float(input("Enter the amount to spend: "))
+        reason = input("Enter the reason for spending: ")
+        
+        if amount <= 0:
+            print(f"Cannot spend a negative amount")
+        elif self.money < amount:
+            print(f"Insufficient funds")
         else:
             self.money -= amount
-            self.stuff_done.append(f"bought an item for {amount}")
-            print(f"{self.name} bought an item for {amount}")
-    def showMoney(self):
-        print(f"{self.name} has {self.money}")
+            self.stuff_done.append(f"spent {amount} for {reason}")
+            
+    def earn_money(self):
+        amount = float(input("Enter the amount to earn: "))
+        reason = input("Enter the reason for earning: ")
+        
+        if amount <= 0:
+            print(f"Cannot earn a negative amount")
+        else:
+            self.money += amount
+            self.stuff_done.append(f"earned {amount} for {reason}")
+        
+    def show_transactions(self):
+        print(f"{self.name} started with {self.starting_money}")
+        
+        print(f"So far, {self.name} has:")
+        for action in self.stuff_done:
+            print(f"- {action}")
+        
+        print(f"{self.name} now has {self.money}")
+
     def generate_image(self, filename="summary.png"):
         # Stage 1: Configuring the blank canvas
         img = Image.new("RGB", (500, 120 + 30 * len(self.stuff_done)), "white")
@@ -59,4 +64,34 @@ class Person:
         
         # Stage 5: Saving the image
         img.save(filename)
+
+    
+
+    # def work(self):
+    #     self.money += 100
+    #     self.stuff_done.append("worked and earned 100")
+    #     print(f"{self.name} worked and earned 100")
+
+    # def deposit(self, amount):
+    #     self.money += amount
+    #     self.stuff_done.append(f"deposited {amount}")
+    #     print(f"{self.name} deposited {amount}")
+
+    # def withdraw(self, amount):
+    #     self.money -= amount
+    #     self.stuff_done.append(f"withdrew {amount}")
+    #     print(f"{self.name} withdrew {amount}")
+
+    # def buy(self, amount):
+    #     if self.money < amount:
+    #         print(f"{self.name} does not have enough money to buy)")
+    #     elif amount <= 0:
+    #         print(f"{self.name} cannot buy an item with a non-positive amount")
+    #     else:
+    #         self.money -= amount
+    #         self.stuff_done.append(f"bought an item for {amount}")
+    #         print(f"{self.name} bought an item for {amount}")
+    # def showMoney(self):
+    #     print(f"{self.name} has {self.money}")
+        
         
